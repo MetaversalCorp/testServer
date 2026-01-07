@@ -1,7 +1,7 @@
 {
    "$schema": "https://railway.com/railway.schema.json",
    "build": {
-      "buildCommand": "echo metaworld && npm install && npm run build:linux:mysql && cd dist && npm install && npm run install:svc"
+      "buildCommand": "echo metaworld && npm install && npm run build:railway && cd dist && npm install && npm run install:svc"
    },
    "deploy": {
       "startCommand": "echo metagate && cd dist && npm start"
