@@ -1,18 +1,18 @@
 /*
 ** Copyright 2025 Metaversal Corporation.
-**
-** Licensed under the Apache License, Version 2.0 (the "License");
-** you may not use this file except in compliance with the License.
-** You may obtain a copy of the License at
-**
+** 
+** Licensed under the Apache License, Version 2.0 (the "License"); 
+** you may not use this file except in compliance with the License. 
+** You may obtain a copy of the License at 
+** 
 **    https://www.apache.org/licenses/LICENSE-2.0
-**
-** Unless required by applicable law or agreed to in writing, software
-** distributed under the License is distributed on an "AS IS" BASIS,
-** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-** See the License for the specific language governing permissions and
+** 
+** Unless required by applicable law or agreed to in writing, software 
+** distributed under the License is distributed on an "AS IS" BASIS, 
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+** See the License for the specific language governing permissions and 
 ** limitations under the License.
-**
+** 
 ** SPDX-License-Identifier: Apache-2.0
 */
 
@@ -44,7 +44,7 @@ class ExtractMap extends MapUtil
    eSTATE = ExtractMap.eSTATE;
    constructor (jSelector, wClass_Object, twObjectIx)
    {
-      let pData =
+      let pData = 
       {
          sExpired : ';expires=Thu, 01 Jan 1970 00:00:01 GMT',
          sPath    : ';path=/',
@@ -53,7 +53,7 @@ class ExtractMap extends MapUtil
       };
 
       super ();
-
+      
       this.#jBody = $('body');
 
       this.#bIsObjectLibLoaded = false;
@@ -80,8 +80,8 @@ class ExtractMap extends MapUtil
       this.jSelector.find ('.jsPublish').on ('click', this.onClick_Publish.bind (this));
       this.jSelector.find ('.jsDisconnect').on ('click', this.onClick_Disconnect.bind (this));
       this.jSelector.find ('.jsNewScene').on ('click', this.onClick_AddScene.bind (this));
-      this.jSelector.find ('.jsDeleteOk').on ('click', this.onClick_DeleteOk.bind (this));
-      this.jSelector.find ('.jsDeleteCancel').on ('click', this.onClick_DeleteCancel.bind (this));
+      this.jSelector.find ('.jsDeleteOk').on ('click', this.onClick_DeleteOk.bind (this)); 
+      this.jSelector.find ('.jsDeleteCancel').on ('click', this.onClick_DeleteCancel.bind (this)); 
 
       this.#pLogin = {
          sUrl: this.#pZone.Get ('sUrl'),
@@ -114,7 +114,7 @@ class ExtractMap extends MapUtil
             this.#m_MapRMXItem[sKey].Detach (this);
             this.#m_pLnG.Model_Close (this.#m_MapRMXItem[sKey]);
          }
-         this.#m_MapRMXItem = {};
+         this.#m_MapRMXItem = {};         
 
          this.#m_pLnG.Detach (this);
          this.#m_pLnG = null;
@@ -142,7 +142,7 @@ class ExtractMap extends MapUtil
    StringToBase64 (str)
    {
       let encoded = btoa (encodeURIComponent (str).replace(/%([0-9A-F]{2})/g,
-        function toSolidBytes(match, p1)
+        function toSolidBytes(match, p1) 
         {
             return String.fromCharCode('0x' + p1);
         }));
@@ -154,20 +154,20 @@ class ExtractMap extends MapUtil
    {
       let decoded = str.replace(/-/g, '+').replace(/_/g, '/');
 
-      while (decoded.length % 4)
+      while (decoded.length % 4) 
       {
          decoded += '=';
       }
 
-      return decodeURIComponent (atob(decoded).split('').map
+      return decodeURIComponent (atob(decoded).split('').map 
          (
-            function(c)
+            function(c) 
             {
                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }
          ).join (''));
    }
-
+  
    InsertSceneItem (pRMCObject, bSelected)
    {
       let jTemplate = this.#jBody.find ('template#tmpl_scene');
@@ -242,7 +242,7 @@ class ExtractMap extends MapUtil
             if (pChild.wClass_Parent == 70)
             {
                this.#jPObject.find ('.jsSceneItem[twObjectIx=' + pChild.twObjectIx + ']').remove ();
-// TODO: finish this
+// TODO: finish this               
             }
          }
       }
@@ -276,7 +276,7 @@ class ExtractMap extends MapUtil
    {
       let Result = {
          twObjectIx:    pRMXObject.twObjectIx,
-         wClass:        pRMXObject.wClass_Object,
+         wClass:        pRMXObject.wClass_Object, 
          sName:         pRMXObject.pName.wsRMPObjectId,
          pTransform:    {
             aPosition: [
@@ -320,7 +320,7 @@ class ExtractMap extends MapUtil
       let apRMXObject = [];
 
       aEditor.push (Node);
-
+      
       pRMXObject.Child_Enum ('RMPObject', this, this.EnumItem, apRMXObject);
 
       for (let n=0; n < apRMXObject.length; n++)
@@ -335,7 +335,7 @@ class ExtractMap extends MapUtil
          this.ParseTree (aEditor, this.#pRMXRoot);
       else
       {
-         aEditor.push
+         aEditor.push 
          (
             {
                "sName": "<New Scene>",
@@ -468,7 +468,7 @@ class ExtractMap extends MapUtil
             }
          }
       }
-      else if (this.#pRMXPending && pNotice.pCreator.IsReady () &&
+      else if (this.#pRMXPending && pNotice.pCreator.IsReady () && 
                pNotice.pCreator.wClass_Object == this.#pRMXPending.wClass_Object && pNotice.pCreator.twObjectIx == this.#pRMXPending.twObjectIx)
       {
          this.#bPending = false;
@@ -490,7 +490,7 @@ class ExtractMap extends MapUtil
       }
       else
       {
-         console.log ('ERROR: Creating Object - ' + pIAction.pResponse.nResult);
+         console.log ('ERROR: Creating Object - ' + pIAction.pResponse.nResult);         
 
          this.#pRMXPending = null;
          this.#bPending = false;
@@ -505,7 +505,7 @@ class ExtractMap extends MapUtil
       }
       else
       {
-         console.log ('ERROR: Parent - ' + pIAction.pResponse.nResult);
+         console.log ('ERROR: Parent - ' + pIAction.pResponse.nResult);         
 
          this.twObjectIx_Reparent = 0;
          this.nReparent = 0;
@@ -566,7 +566,7 @@ class ExtractMap extends MapUtil
          {
             mpRemovedNodes[apRMXObject[n].twObjectIx] = apRMXObject[n];
             pJSONObjectX = null;
-         }
+         } 
 
          this.GetRemovedNodes (pJSONObjectX, apRMXObject[n], mpRemovedNodes);
       }
@@ -770,7 +770,7 @@ class ExtractMap extends MapUtil
 
       this.jSelector.find ('.jsUnsaved').hide ();
       console.log ('Publish Complete!');
-
+   
 //      if (bSelectItem)
       {
          this.#jPObject.find ('.jsSceneItem[twObjectIx=' + this.#pRMXRoot.twObjectIx + ']')
@@ -817,7 +817,7 @@ class ExtractMap extends MapUtil
          if (this.#pRMXRoot == null)
          {
             this.#pRMXRoot = this.#pRMXPending;
-
+         
             let mpRemovedNodes = {};
             this.UpdateRMPObject (pJSONObject[0], this.#m_MapRMXItem[this.#m_wClass_Object + '-' + this.#m_twObjectIx], mpRemovedNodes, pJSONObjectX[0]);
             this.RemoveRMPObject (mpRemovedNodes, pJSONObjectX[0], true);
@@ -880,14 +880,14 @@ class ExtractMap extends MapUtil
          console.log ('ERROR: ' + pIAction.pResponse.nResult, pIAction);
       }
 
-      DismissDeleteWarning ();
+      DismissDeleteWarning ();      
    }
 
    onClick_DeleteOk (e)
    {
       let pIAction = this.#m_MapRMXItem[this.#m_wClass_Object + '-' + this.#m_twObjectIx].Request ('RMPOBJECT_CLOSE');
       let Payload = pIAction.pRequest;
-
+      
       Payload.twRMPObjectIx_Close = this.pTmpDelete.twObjectIx;
       Payload.bDeleteAll    = 1;
 
@@ -899,7 +899,7 @@ class ExtractMap extends MapUtil
       const modalElement = document.getElementById ('deleteChangesModal');
       const modal = bootstrap.Modal.getInstance (modalElement);
 
-      if (modal)
+      if (modal) 
          modal.hide();
    }
 
@@ -946,7 +946,7 @@ class ExtractMap extends MapUtil
    {
       if (this.#pLogin.bLoggedIn == false)
       {
-         let pData =
+         let pData = 
          {
             sExpired : ';expires=Thu, 01 Jan 1970 00:00:01 GMT',
             sPath    : ';path=/',
