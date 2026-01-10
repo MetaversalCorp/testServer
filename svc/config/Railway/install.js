@@ -1,18 +1,18 @@
 /*
 ** Copyright 2025 Metaversal Corporation.
-**
-** Licensed under the Apache License, Version 2.0 (the "License");
-** you may not use this file except in compliance with the License.
-** You may obtain a copy of the License at
-**
+** 
+** Licensed under the Apache License, Version 2.0 (the "License"); 
+** you may not use this file except in compliance with the License. 
+** You may obtain a copy of the License at 
+** 
 **    https://www.apache.org/licenses/LICENSE-2.0
-**
-** Unless required by applicable law or agreed to in writing, software
-** distributed under the License is distributed on an "AS IS" BASIS,
-** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-** See the License for the specific language governing permissions and
+** 
+** Unless required by applicable law or agreed to in writing, software 
+** distributed under the License is distributed on an "AS IS" BASIS, 
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+** See the License for the specific language governing permissions and 
 ** limitations under the License.
-**
+** 
 ** SPDX-License-Identifier: Apache-2.0
 */
 
@@ -41,7 +41,7 @@ class MVSF_Map_Install
       if (bResult == false)
       {
          console.log ('Starting Installation...');
-
+         
          bResult = await this.#ExecSQL ('MSF_Map.sql', true, [['[{MSF_Map}]', Settings.SQL.config.database]] );
 
          if (bResult)
@@ -84,15 +84,15 @@ class MVSF_Map_Install
       const pConfig = { ...Settings.SQL.config };
       let pConn;
       let aRegex = [];
-
+      
       console.log ('Sample STARTING ...');
-
-      try
+     
+      try 
       {
          for (let i=0; i < asToken.length; i++)
          {
             aRegex.push (new RegExp (this.#EscapeRegExp (asToken[i][0]), "g"));
-         }
+         }            
 
          // Create connection
          pConn = await mysql.createConnection (pConfig);
@@ -116,14 +116,14 @@ class MVSF_Map_Install
          }
          else
             console.log ('Sample FAILED to create scene');
-      }
-      catch (err)
+      } 
+      catch (err) 
       {
          console.error ('Error executing SQL:', err.message);
-      }
-      finally
+      } 
+      finally 
       {
-         if (pConn)
+         if (pConn) 
          {
             await pConn.end ();
          }
@@ -135,7 +135,6 @@ class MVSF_Map_Install
    #ProcessFabricConfig ()
    {
       const sFabricPath = path.join (__dirname, 'web', 'fabric');
-      console.log ('Creating Fabric File');
 
       try
       {
@@ -148,7 +147,6 @@ class MVSF_Map_Install
          sContent = sContent.replace (/<MY_COMPANY_ID>/g, Settings.MVSF.sCompanyId);
 
          fs.writeFileSync (path.join (sFabricPath, 'fabric.msf'), sContent, 'utf8');
-         console.log (path.join (sFabricPath, 'fabric.msf'));
       }
       catch (err)
       {
@@ -184,18 +182,18 @@ class MVSF_Map_Install
       const pConfig = { ...Settings.SQL.config };
       let pConn;
       let aRegex = [];
-
+      
       if (bCreate)
          delete pConfig.database; // Remove database from config to connect without it
 
       console.log ('Installing (' + sFilename + ')...');
-
-      try
+     
+      try 
       {
          for (let i=0; i < asToken.length; i++)
          {
             aRegex.push (new RegExp (this.#EscapeRegExp (asToken[i][0]), "g"));
-         }
+         }            
 
          // Create connection
          pConn = await mysql.createConnection (pConfig);
@@ -237,15 +235,15 @@ class MVSF_Map_Install
                }
          }
 
-         console.log ('Successfully installed (' + sFilename + ')');
-      }
-      catch (err)
+         console.log ('Successfully installed (' + sFilename + ')');      
+      } 
+      catch (err) 
       {
          console.error ('Error executing SQL:', err.message);
-      }
-      finally
+      } 
+      finally 
       {
-         if (pConn)
+         if (pConn) 
          {
             await pConn.end ();
          }
@@ -260,7 +258,7 @@ class MVSF_Map_Install
       let sDB = pConfig.database;
 
       delete pConfig.database; // Remove database from config to connect without it
-      try
+      try 
       {
          // Create connection
          pConn = await mysql.createConnection (pConfig);
@@ -275,14 +273,14 @@ class MVSF_Map_Install
          {
             bResult = true;
          }
-      }
-      catch (err)
+      } 
+      catch (err) 
       {
          console.error ('Error executing SQL:', err.message);
-      }
-      finally
+      } 
+      finally 
       {
-         if (pConn)
+         if (pConn) 
          {
             await pConn.end ();
          }
