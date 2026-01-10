@@ -59,8 +59,9 @@ class MVSF_Map_Install
       console.log ('Running Config Scripts...');
       this.Install ('sample', '');
       if(fs.existsSync(path.join(__dirname, 'web/fabric', 'sample.msf')))
-         console.log('sample.msf file found')else {
-            console.log('sample.msf file not found')
+         console.log('sample.msf file found');
+      else {
+            console.log('sample.msf file not found');
          }
       this.#ProcessFabricConfig ();
       this.Install ('objects', 'objects');
